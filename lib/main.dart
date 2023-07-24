@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test/appbar.dart';
+import 'package:test/share.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,40 +15,39 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class HomePageState extends State<HomePage> {
-  num a = 15, b = 5;
-  String _txt = '';
-
-  void btn_pressed({String op = ''}) {
-    setState(() {
-      num r = 0;
-      if (op == '+') {
-        r = a + b;
-      } else if (op == '-') {
-        r = a - b;
-      }
-      _txt = '15 + 5 = $r';
-    });
-  }
-
+class _HomePageState extends State<HomePage> {
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text('Test')),
-        body: Center(
-          child: Column(children: [
-            SizedBox(height: 15),
-            Text(_txt, textScaleFactor: 1.2),
-            SizedBox(height: 20),
-            ElevatedButton(
-                child: Text('$a + $b', textScaleFactor: 1.2),
-                onPressed: () => btn_pressed(op: '+')),
-            ElevatedButton(
-                child: Text('$a - $b', textScaleFactor: 1.2),
-                onPressed: () => btn_pressed(op: '-')),
-          ]),
+  Widget build(BuildContext context) {
+    var text = !Share.isLoggedIn
+        ? 'แอปนี้จำเป็นจ้องเข้าสู่ระบบ\n'
+            'ก่อนการใช้งานในเพจต่างๆ\n\n'
+            'แตะที่ไอค่อนมุมขวาบน\nเพื่อเข้สู่ระบบ'
+        : 'ท่านเข้าสู่ระบบแล้ว\n\n' 'แต่ที่ไอคอมมุมขวาบน\nเพื่อออกจากระบบ';
+
+    var icon = !Share.isLoggedIn ? Icons.lock_rounded : Icons.check;
+
+    Share.updateState = (value) {
+      setState(() {
+        Share.isLoggedIn = value;
+      });
+    };
+
+    return Scaffold(
+      appBar: buildAppbar(context, 'Login'),
+      body: Container(
+        alignment: Alignment.topCenter,
+        padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+        child: Column(
+          children: [
+            Icon(icon, size: 64),
+            const SizedBox(height: 30),
+            Text(text, textScaleFactor: 1.7)
+          ],
         ),
-      );
+      ),
+    );
+  }
 }
