@@ -22,10 +22,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var text = !Share.isLoggedIn
-        ? 'แอปนี้จำเป็นจ้องเข้าสู่ระบบ\n'
-            'ก่อนการใช้งานในเพจต่างๆ\n\n'
-            'แตะที่ไอค่อนมุมขวาบน\nเพื่อเข้สู่ระบบ'
-        : 'ท่านเข้าสู่ระบบแล้ว\n\n' 'แต่ที่ไอคอมมุมขวาบน\nเพื่อออกจากระบบ';
+        ? 'แอปนี้จำเป็นจ้องเข้าสู่ระบบ \n ก่อนการใช้งานในเพจต่างๆ \n\n แตะที่ไอค่อนมุมขวาบน \n เพื่อเข้สู่ระบบ'
+        : 'ท่านเข้าสู่ระบบแล้ว\n\nแต่ที่ไอคอมมุมขวาบน\nเพื่อออกจากระบบ';
 
     var icon = !Share.isLoggedIn ? Icons.lock_rounded : Icons.check;
 
@@ -44,7 +42,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Icon(icon, size: 64),
             const SizedBox(height: 30),
-            Text(text, textScaleFactor: 1.7)
+            Text(text, textScaleFactor: 1.7),
           ],
         ),
       ),
