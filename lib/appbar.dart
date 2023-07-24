@@ -23,8 +23,6 @@ AppBar buildAppbar(
     Navigator.of(context).popUntil((route) => route.isFirst);
   }
 
-  ;
-
   return AppBar(
     title: Text(title),
     actions: [
