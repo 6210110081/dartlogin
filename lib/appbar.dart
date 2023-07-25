@@ -38,7 +38,7 @@ AppBar buildAppbar(
                 title: 'Logout',
                 content: 'Are you sure?',
                 okAction: logout,
-                showCancle: true,
+                showCancel: true,
               ),
             ),
     ],

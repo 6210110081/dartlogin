@@ -7,11 +7,11 @@ void alert(
   String title = '',
   String content = '',
   Function? okAction,
-  bool showCancle = false,
+  bool showCancel = false,
 }) {
   okPress() {
     Navigator.of(context).pop();
-    okAction!.call();
+    okAction!();
   }
 
   cancelPressed() {
@@ -25,17 +25,17 @@ void alert(
 
   if (Platform.isAndroid) {
     var btnOK = TextButton(
-      onPressed: okPress.call(),
+      onPressed: okPress,
       child: textOk,
     );
 
     var btnCancel = TextButton(
-      onPressed: cancelPressed.call(),
+      onPressed: cancelPressed,
       child: textCancel,
     );
 
     var btns = <TextButton>[btnOK];
-    showCancle ? btns.add(btnCancel) : null;
+    showCancel ? btns.add(btnCancel) : null;
 
     showDialog(
       context: context,
@@ -47,17 +47,17 @@ void alert(
     );
   } else if (Platform.isIOS) {
     var btnOK = CupertinoDialogAction(
-      onPressed: okPress.call(),
+      onPressed: okPress,
       child: textOk,
     );
 
     var btnCancel = CupertinoDialogAction(
-      onPressed: cancelPressed.call(),
+      onPressed: cancelPressed,
       child: textCancel,
     );
 
     var btns = <CupertinoDialogAction>[btnOK];
-    showCancle ? btns.add(btnCancel) : null;
+    showCancel ? btns.add(btnCancel) : null;
 
     showCupertinoDialog(
       context: context,
